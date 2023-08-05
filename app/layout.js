@@ -1,5 +1,7 @@
 import "./globals.css";
 
+import { Analytics } from "@vercel/analytics/react";
+
 import Providers from "./providers";
 import Navbar from "@/components/Navbar/Navbar";
 import BetSlip from "@/components/BetSlip/BetSlip";
@@ -22,6 +24,7 @@ export default function RootLayout({ children }) {
 						<Footer />
 					</Providers>
 				</div>
+				<Analytics />
 			</body>
 		</html>
 	);
