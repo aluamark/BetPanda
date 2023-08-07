@@ -137,12 +137,12 @@ const BetSlip = () => {
 										);
 									})}
 								</div>
-
 								<div className="relative flex items-center">
 									<input
 										type="number"
 										placeholder="ENTER AMOUNT"
-										className={`hide-arrows bg-zinc-800 border rounded-lg p-3 w-full focus:outline-none ${
+										disabled={session && session.user ? false : true}
+										className={`hide-arrows bg-zinc-800 border rounded-lg p-3 w-full focus:outline-none disabled:cursor-not-allowed ${
 											noAmount ? "border-red-500" : "border-zinc-700"
 										}`}
 										value={amount === 0 ? "" : amount}
@@ -175,30 +175,36 @@ const BetSlip = () => {
 										</svg>
 									</button>
 								</div>
-								<div className="flex justify-between items-center">
-									<div className="flex gap-2.5">
-										<AddAmount
-											title="+50"
-											addAmount={50}
-											setAmount={handleAddAmount}
-										/>
-										<AddAmount
-											title="+100"
-											addAmount={100}
-											setAmount={handleAddAmount}
-										/>
-										<AddAmount
-											title="+500"
-											addAmount={500}
-											setAmount={handleAddAmount}
-										/>
-										<AddAmount
-											title="+1000"
-											addAmount={1000}
-											setAmount={handleAddAmount}
-										/>
-										<AddAmount title="MAX" setAmount={handleAddAmount} />
-									</div>
+								<div className="flex gap-2.5 flex-wrap md:flex-nowrap">
+									<AddAmount
+										title="+50"
+										addAmount={50}
+										setAmount={handleAddAmount}
+										disabled={session && session.user ? false : true}
+									/>
+									<AddAmount
+										title="+100"
+										addAmount={100}
+										setAmount={handleAddAmount}
+										disabled={session && session.user ? false : true}
+									/>
+									<AddAmount
+										title="+500"
+										addAmount={500}
+										setAmount={handleAddAmount}
+										disabled={session && session.user ? false : true}
+									/>
+									<AddAmount
+										title="+1000"
+										addAmount={1000}
+										setAmount={handleAddAmount}
+										disabled={session && session.user ? false : true}
+									/>
+									<AddAmount
+										title="MAX"
+										setAmount={handleAddAmount}
+										disabled={session && session.user ? false : true}
+									/>
 								</div>
 								<div className="flex flex-col">
 									{session && session.user && user && user.data && (
