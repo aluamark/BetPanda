@@ -11,6 +11,9 @@ import { BetSlipContext } from "@/app/providers";
 import Bet from "./Bet";
 import AddAmount from "./AddAmount";
 
+import LoginModal from "../Navbar/LoginModal";
+import SignUpModal from "../Navbar/SignUpModal";
+
 const BetSlip = () => {
 	const { betSlip, setBetSlip, removeBetToSlip } = useContext(BetSlipContext);
 	const { data: session } = useSession();
@@ -30,6 +33,9 @@ const BetSlip = () => {
 	const [odds, setOdds] = useState(0);
 	const [total, setTotal] = useState(0);
 	const [noAmount, setNoAmount] = useState(false);
+
+	const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+	const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
 
 	const handlePlaceBet = async () => {
 		setIsLoading(true);
@@ -265,8 +271,11 @@ const BetSlip = () => {
 									</button>
 								) : (
 									<button
-										onClick={() => signIn("google")}
-										className="bg-gradient-to-t from-green-800 to-green-600 text-white p-3 font-bold rounded-lg shadow-xl text-xs md:text-sm"
+										onClick={() => {
+											setIsSignUpModalOpen(false);
+											setIsLoginModalOpen(true);
+										}}
+										className="flex justify-center items-center bg-gradient-to-t from-green-900 to-green-600 text-white p-3 font-bold rounded shadow-xl text-sm duration-500 disabled:opacity-50 disabled:cursor-not-allowed"
 									>
 										PLEASE LOGIN TO MAKE A BET
 									</button>
@@ -313,6 +322,16 @@ const BetSlip = () => {
 				</svg>
 				Bet Slip
 			</button>
+			<LoginModal
+				isOpen={isLoginModalOpen}
+				setIsOpen={setIsLoginModalOpen}
+				setIsSignUpModalOpen={setIsSignUpModalOpen}
+			/>
+			<SignUpModal
+				isOpen={isSignUpModalOpen}
+				setIsOpen={setIsSignUpModalOpen}
+				setIsLoginModalOpen={setIsLoginModalOpen}
+			/>
 		</>
 	);
 };
